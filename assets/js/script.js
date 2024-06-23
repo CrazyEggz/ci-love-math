@@ -34,8 +34,22 @@ function runGame(gameType) {
     }
 }
 
+/**
+ * Check the answer against the first element in
+ * the returned calculateCorrectAnswer array
+ */
 function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculateAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculateAnswer[0];
 
+    if (isCorrect) {
+        alert("Hey! You got it right! :D")
+    } else {
+        alert(`Awww...you answered ${userAnswer}, The correct answer is ${calculateAnswer[0]}.`);
+    }
+
+    runGame(calculateAnswer[1]);
 }
 
 /**
@@ -43,9 +57,9 @@ function checkAnswer() {
  * directly from the dom, and returns the correct answer.
  */
 function calculateCorrectAnswer() {
-    let operand1 = parseInt(document.getElementById("operand1"));
-    let operand2 = parseInt(document.getElementById("operand2"));
-    let operator = document.getElementById("operator");
+    let operand1 = parseInt(document.getElementById("operand1").innerText);
+    let operand2 = parseInt(document.getElementById("operand2").innerText);
+    let operator = document.getElementById("operator").innerText;
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
     } else {
