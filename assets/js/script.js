@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let button of buttons) {
         button.addEventListener("click", function(){
             if (this.getAttribute("date-type") === "submit") {
-                alert("You've clicked submit");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("date-type");
                 runGame(gameType);
@@ -38,8 +38,20 @@ function checkAnswer() {
 
 }
 
+/**
+ * Gets the operands (the numbers) and the operator
+ * directly from the dom, and returns the correct answer.
+ */
 function calculateCorrectAnswer() {
-
+    let operand1 = parseInt(document.getElementById("operand1"));
+    let operand2 = parseInt(document.getElementById("operand2"));
+    let operator = document.getElementById("operator");
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
+    }
 }
 
 function incrementScore() {
